@@ -1,13 +1,12 @@
-import data from '../data.js';
 import dom from '../dom.js';
-import sortFlights from '../utils/sortFlights.js';
-import createFlight from '../components/createFlight.js';
+import getTodos from '../../apis/getTodos.js';
+import createTodo from '../components/createTodo.js';
 
-const loadHandler = () => {
-    const organizedFlights = sortFlights(data);
-    organizedFlights.forEach((flight) => {
-        const flightDom = createFlight(flight);
-        dom.parent.appendChild(flightDom);
+const loadHandler = async () => {
+    const todos = await getTodos();
+    todos.forEach((todoData) => {
+        const todoDom = createTodo(todoData);
+        dom.list.append(todoDom);
     });
 };
 
